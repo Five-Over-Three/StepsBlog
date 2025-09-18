@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+}
+
+body {
+    background-color: floralwhite;
+    color: darkred;
+}
+
+#navbar {
+    background-color: floralwhite;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-variant: small-caps;
+    padding: 10px 100px;
+    margin: 0px;
+    /* border: 1px solid black; */
+    height: 150px;
+}
+
+#navbar h1 {
+    display: flex;
+    font-size: 40px;
+    color: white;
+    text-shadow:
+    1px 1px black,
+    2px 2px 3px darkred,
+    1px -1px black,
+    -1px 1px black,
+    -1px -1px black;
+    /* border: 1px solid blue; */
+    height: 100px;
+    align-items: center;
+}
+
+#tabs {
+    display: flex;
+    font-variant:normal;
+    font-weight: normal;
+    font-size: 16pt;
+    color: darkred;
+    /* border: 1px solid black; */
+    height: 100px;
+    width: 100%;
+    align-items: center;
+    justify-content: right;
+}
+
+#tabs span {
+    padding: 10px;
+}
+
+.headers {
+    display: flex;
+    height: 150px;
+    padding: 0px;
+    margin: 0px;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+#logo {
+    height: 100px;
+    width: 100px;
+    margin-left: 25px;
+    margin-right: 10px;
+    /* border: 1px solid green; */
+}
+
+article {
+    color: dimgray;
+    font-family: helvetica;
+    font-weight: normal;
+    padding: 10px 100px 10px 200px;
+    font-size: 16pt;
+    /* border: 1px solid red; */
+}
+
+article h1 {
+    color: darkred;
+    font-weight: normal;
+    font-variant: small-caps;
+    font-size: 48pt;
+}
+
+h3 {
+    color: darkred;
+    font-weight: normal;
+    font-size: 20pt;
+    font-variant: small-caps;
+}
+
+article h3 {
+    margin-right: 50px;
+}
+
+.walking_stats {
+    display: flex;
+    margin: 20px 0px;
+    /* border: 1px solid green; */
+}
+
+#comment_text {
+    margin-top: 30px;
+    /* border: 1px solid blue; */
+}
+
+.stat_value {
+    font-weight: bold;
+}
+
+#body_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#date_picker {
+    /* border: 1px solid green; */
+    margin: 0px 100px 0px 20px;
+    font-size: 13pt;
+}
+
+#post_content {
+    flex: 1;
+}
+
+#date_picker h3 {
+    font-weight: bold;
+    padding: 10px;
+    width: 200px;
+    /* border: 1px solid blue; */
+    text-align: center;
+    font-size: 22pt;
+}
+
+#date_picker ul {
+    /* border: 1px solid yellow; */
+    list-style: none;
+    margin: 5px 20px;
+}
+
+#date_picker li {
+    margin-top: 5px;
+}
+
+#dates {
+    margin: 10px 20px;
+}
+
+.months {
+    font-weight: bold;
+}
+
+.days {
+    font-weight: normal;
+    color: dimgray;
+}
+
+.days a {
+    text-decoration: none;
+}
+
+.days a:link, a:visited {
+    color: dimgray;
+}
+
+.days a:hover {
+    color: darkred;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="uploader_styles.css" />
+        <title>Activity Blog - Data Uploader</title>
+    </head>
+    <body>
+        <h1 id="page_title">Activity Blog - Data Uploader</h1>
+        <form id="upload_form">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required/><br />
+
+            <label for="steps">Steps</label>
+            <input type="number" id="steps" name="steps" required/><br />
+
+            <label for="distance">Distance</label>
+            <input type="number" id="distance" name="distance" required/><br />
+
+            <label for="pushups">Push-ups</label>
+            <input type="number" id="pushups" name="pushups" required/><br />
+
+            <label for="situps">Sit-ups</label>
+            <input type="number" id="situps" name="situps" required/><br />
+
+            <label for="squats">Squats</label>
+            <input type="number" id="squats" name="squats" required/><br />
+
+            <label for="weight">Weight</label>
+            <input type="number" id="weight" name="weight" required/><br />
+
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="comment" rows="10" cols="50" required></textarea><br />
+
+            <input type="submit" value="Upload" />
+        </form>
+    </body>
+</html>

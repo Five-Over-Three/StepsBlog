@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='blog_styles.css') }}" />
+
+{% endblock stylesheet %}
+
+{% block main %}
+
+<div id="body_content">
+    <div id="post_content">
+        <article>
+            <div>
+                <h1 id="date_value">{{ day_name }} {{ display_data.at[0, 'day'] }} {{ month_name }} {{ display_data.at[0, 'year'] }}</h1>
+                <div class="walking_stats">
+                    <h3>Steps: <span id="steps_value" class="stat_value">{{ "{:,}".format(display_data.at[0, 'steps']) }}</span></h3>
+                    <h3>Distance: <span id="dist_value" class="stat_value">{{ "{:.2f}km".format(display_data.at[0, 'distance']/1000) }}</span></h3>
+                </div>
+            </div>
+            <div id="comment_text">
+                {{ display_data.at[0, 'comment'] }} 
+            </div>
+        </article>
+    </div>
+    <div id="date_picker">
+        <h3>Past Posts</h3>
+        <div id="dates">
+            <ul>
+                <li class="months">August
+                    <ul>
+                        <li class="days"><a href='/2025/8/20'>Wed 20th</a></li>
+                    </ul>
+                </li>
+                <li class="months">June
+                    <ul>
+                        <li class="days"><a href='/2025/6/30'>Mon 30th</a></li>
+                        <li class="days"><a href='/2025/6/29'>Sun 29th</a></li>
+                        <li class="days"><a href='/2025/6/28'>Sat 28th</a></li>
+                        <li class="days"><a href='/2025/6/27'>Fri 27th</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='uploader_styles.css') }}" />
+
+{% endblock stylesheet %}
+
+{% block main %}
+
+<h3>Uploaded following data:</h3>
+<div id='uploaded_data'>
+    <div><span>{{ form.date.label }}:</span> {{ request.form['date'] }}</div>
+    <div><span>{{ form.steps.label }}:</span> {{ request.form['steps'] }}</div>
+    <div><span>{{ form.distance.label }}:</span> {{ request.form['distance'] }}</div>
+    <div><span>{{ form.pushups.label }}:</span> {{ request.form['pushups'] }}</div>
+    <div><span>{{ form.situps.label }}:</span> {{ request.form['situps'] }}</div>
+    <div><span>{{ form.squats.label }}:</span> {{ request.form['squats'] }}</div>
+    <div><span>{{ form.weight.label }}:</span> {{ request.form['weight'] }}</div>
+    <div><span>{{ form.comment.label }}:</span> {{ request.form['comment'] }}</div>
+</div>
+
+{% endblock main %}

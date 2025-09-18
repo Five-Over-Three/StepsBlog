@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='uploader_styles.css') }}" />
+
+{% endblock stylesheet %}
+
+{% block main %}
+
+<div id="body_content">
+    <h1>Activity Blog - Data Uploader</h1>
+    
+    <form id="upload_form", action="{{ url_for('uploader')}}" method="POST">
+        {{ form.date.label }}
+        {{ form.date() }} <br />
+        
+        {{ form.steps.label }}
+        {{ form.steps() }} <br />
+        
+        {{ form.distance.label }}
+        {{ form.distance() }} <br />
+        
+        {{ form.pushups.label }}
+        {{ form.pushups() }} <br />
+        
+        {{ form.situps.label }}
+        {{ form.situps() }} <br />
+        
+        {{ form.squats.label }}
+        {{ form.squats() }} <br />
+        
+        {{ form.weight.label }}
+        {{ form.weight() }} <br />
+        
+        {{ form.comment.label }}
+        {{ form.comment(rows="10", cols="50") }} <br />
+        
+        <input type="submit" value="Upload" />
+    </form>
+</div>
+
+{% endblock main %}
