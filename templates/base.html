@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {% block stylesheet %}
-    {% endblock stylesheet %}
+		{% block stylesheet %}
+		{% endblock stylesheet %}
 
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}" />
-    <title>Activity Blog</title>
-</head>
-<body>
-    <nav id="navbar">
-        <div class="headers">
-            <img id="logo" src="{{ url_for('static', filename='logo.png') }}">
-            <h1>FiveOverThree</h1>
-            <div id="tabs">
-                <span>Projects</span>
-                <span>Portfolio</span>
-                <span><a href='http://fiveoverthree.co.uk/stepsblog/'>Blog</a></span>
-                <span>About</span>
-            </div>
-        </div> 
-    </nav>
-    {% block main %}/
-    {% endblock main %}
-</body>
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}" />
+		<title>Activity Blog</title>
+	</head>
+	<body>
+		<nav id="navbar">
+			<div class="headers">
+				<a href="http://fiveoverthree.co.uk">
+					<img id="logo" src="{{ url_for('static', filename='logo.png') }}">
+				</a>
+				<a href="http://fiveoverthree.co.uk">
+					<h1>FiveOverThree</h1>
+				</a>
+				<div id="tabs">
+					<span>Projects</span>
+					<span>Portfolio</span>
+					<span><a href='http://fiveoverthree.co.uk/stepsblog/'>Blog</a></span>
+					<span>About</span>
+				</div>
+			</div> 
+		</nav>
+		{% block main %}/
+		{% endblock main %}
+	</body>
 </html>
