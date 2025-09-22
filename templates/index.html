@@ -5,3 +5,20 @@
 <link rel="stylesheet" href="{{url_for('static', filename='blog_styles.css') }}" />
 
 {% endblock stylesheet %}
+
+{% block main %}
+
+<article>
+    <h1>Activity Blog</h1>
+    <div id="comment_text">
+        <p>At the start of June 2025, I challenged myself to walk 10,000 steps a day for the entire month. I posted the distance and number of steps to Twitter every day in an effort to keep myself honest.</p><br />
+        <p>I succeeded and found out a couple of interesting things about myself:</p><br />
+        <ul>
+            <li>The exercise was very beneficial for my physical and mental health and for managing my ADHD</li>
+            <li>By posting to Twitter, I was making myself accountable which was incredibly effective in not just letting things slide</li>
+        </ul><br />
+        <p>In addition, I was losing weight very quickly, which is a good thing as I was a bit of a blob.</p><br />
+        <p>Rather than relentlessly boring my friends on Twitter, I decided to start this blog, both as a way to carry on the above benefits, but also to force myself to learn new things. From a very rudimentary knowledge of basic HTML, I am now self-hosting this site on a Raspberry Pi in my living room and have built this site using Python, Flask, nginx and gunicorn!</p><br />
+    </div>
+</article>
+{% endblock main %}

@@ -52,6 +52,15 @@ body {
     padding: 10px;
 }
 
+#tabs span a {
+    color: darkred;
+    text-decoration: none;
+}
+
+#tabs span a:hover, a:active {
+    color: dimgray;
+}
+
 .headers {
     display: flex;
     height: 150px;
@@ -93,6 +102,11 @@ h3 {
 }
 
 article h3 {
+    margin-right: 50px;
+}
+
+article li {
+    margin-left: 50px;
     margin-right: 50px;
 }
 
