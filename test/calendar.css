@@ -1,0 +1,33 @@
+* {
+    margin: none;
+    padding: none;
+    font-weight: normal;
+}
+
+body {
+    background-color: floralwhite;
+    color: darkred;
+    font-family: Helvetica;
+}
+
+#calendarcontainer {
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+}
+
+th {
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
+    font-variant: small-caps;
+}
