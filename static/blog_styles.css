@@ -71,7 +71,7 @@ body {
 }
 
 .headers a:link {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #logo {
@@ -120,7 +120,7 @@ article li {
     /* border: 1px solid green; */
 }
 
-#comment_text {
+#comment_text, #challenge {
     margin-top: 30px;
     /* border: 1px solid blue; */
 }
@@ -187,4 +187,35 @@ article li {
 
 .days a:hover {
     color: darkred;
+}
+
+#calendarcontainer {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    color: darkred;
+}
+
+#calendarcontainer table {
+    border-collapse: collapse;
+}
+
+#calendarcontainer td, th {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+}
+
+#calendarcontainer th {
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+#monthheader {
+    border: none;
+    color: lightgray;
+}
+
+.dayheader {
+    border-bottom: 1px solid lightgray;
 }

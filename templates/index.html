@@ -20,5 +20,36 @@
         <p>In addition, I was losing weight very quickly, which is a good thing as I was a bit of a blob.</p><br />
         <p>Rather than relentlessly boring my friends on Twitter, I decided to start this blog, both as a way to carry on the above benefits, but also to force myself to learn new things. From a very rudimentary knowledge of basic HTML, I am now self-hosting this site on a Raspberry Pi in my living room and have built this site using Python, Flask, nginx and gunicorn!</p><br />
     </div>
+    <div id="challenge">
+        <h3>November Challenge</h3><br />
+        <p>My aim is to do 10,000 steps, 100 push-ups and 100 sit-ups every day in November. Daily progress is shown in the calendar below. Click a day to see how I'm doing!</p><br />
+        <div id="calendarcontainer">
+            <table>
+                <tr>
+                    <th id='monthheader' colspan="7">November 2025</th>
+                </tr>
+                <tr>
+                    <th class="dayheader">Mon</th>
+                    <th class="dayheader">Tue</th>
+                    <th class="dayheader">Wed</th>
+                    <th class="dayheader">Thu</th>
+                    <th class="dayheader">Fri</th>
+                    <th class="dayheader">Sat</th>
+                    <th class="dayheader">Sun</th>
+                </tr>
+                {% for month in myMonth %}
+                <tr>
+                    {% for day in month %}
+                    <td>
+                        {% if day != 0 %}
+                        {{ day }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </article>
 {% endblock main %}

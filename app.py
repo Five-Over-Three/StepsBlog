@@ -23,11 +23,13 @@ form = UploadForm()
 #set up to write data
 col_names = [['year', 'month', 'day', 'steps', 'distance', 'pushups', 'situps', 'squats', 'weight', 'comment']]
 date_format = '%Y-%m-%d'
+myCal = calendar.Calendar()
 
 @app.route('/')
 def blog():
     #TODO - need homepage stuffs here e.g. link to latest post, calendar, graphs etc.
-    return render_template('index.html')
+    myMonth = myCal.monthdayscalendar(2025, 11)
+    return render_template('index.html', myMonth=myMonth)
 
 @app.route('/<int:year>/<int:month>/<int:day>')
 def show_day(year, month, day):
