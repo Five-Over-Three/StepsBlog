@@ -26,7 +26,7 @@
         <div id="calendarcontainer">
             <table>
                 <tr>
-                    <th id='monthheader' colspan="7">November 2025</th>
+                    <th id='monthheader' colspan="7">{{monthName}} {{calYear}}</th>
                 </tr>
                 <tr>
                     <th class="dayheader">Mon</th>
@@ -36,13 +36,28 @@
                     <th class="dayheader">Fri</th>
                     <th class="dayheader">Sat</th>
                     <th class="dayheader">Sun</th>
-                </tr>
+                </tr> 
+                <!-- {% if link_data.get(day) %}
+                class="complete"
+                {% endif %} -->
                 {% for month in myMonth %}
                 <tr>
                     {% for day in month %}
+                    {% if link_data.get(day) %}
+                        {% if link_data[day] >= 10000 %}
+                        <td class="complete">
+                        {% else %}
+                        <td class="partial">
+                        {% endif %}
+                    {% else %}
                     <td>
+                    {% endif %}
                         {% if day != 0 %}
+                        {% if link_data.get(day) %}
+                        <a href="{{ url_for('show_day', year=calYear, month=calMonth, day=day) }}">{{ day }}</a>
+                        {% else %}
                         {{ day }}
+                        {% endif %}
                         {% endif %}
                     </td>
                     {% endfor %}

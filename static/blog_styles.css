@@ -194,6 +194,7 @@ article li {
     justify-content: center;
     padding: 50px;
     color: darkred;
+    user-select: none;
 }
 
 #calendarcontainer table {
@@ -202,13 +203,29 @@ article li {
 
 #calendarcontainer td, th {
     width: 50px;
-    height: 30px;
+    height: 50px;
     text-align: center;
 }
 
 #calendarcontainer th {
     font-weight: bold;
     font-variant: small-caps;
+}
+
+.complete {
+    background: linear-gradient(to bottom, transparent 10%, rgba(60, 179, 113, 0.5))
+}
+
+.complete:hover {
+    background: linear-gradient(to bottom, transparent 10%, rgba(60, 179, 113, 1))
+}
+
+.partial {
+    background: linear-gradient(to bottom, transparent 10%, rgba(240, 128, 128, 0.5))
+}
+
+.partial:hover {
+    background: linear-gradient(to bottom, transparent 10%, rgba(240, 128, 128, 1))
 }
 
 #monthheader {
@@ -218,4 +235,22 @@ article li {
 
 .dayheader {
     border-bottom: 1px solid lightgray;
+}
+
+#calendarcontainer a {
+    text-decoration: none;
+    color:darkred;
+}
+
+#calendarcontainer a:hover {
+    color: darkred;
+    font-weight:bold;
+}
+
+#calendarcontainer a:active {
+    color: darkred;
+}
+
+#calendarcontainer a:visited {
+    color: darkred;
 }
