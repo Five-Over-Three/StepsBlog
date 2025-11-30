@@ -23,7 +23,7 @@ form = UploadForm()
 #set up to write data
 col_names = [['year', 'month', 'day', 'steps', 'distance', 'pushups', 'situps', 'squats', 'weight', 'comment']]
 date_format = '%Y-%m-%d'
-calMonth = 8
+calMonth = 12
 calYear = 2025
 myCal = calendar.Calendar()
 
