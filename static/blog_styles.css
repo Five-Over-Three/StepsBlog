@@ -254,3 +254,29 @@ article li {
 #calendarcontainer a:visited {
     color: darkred;
 }
+
+footer {
+    margin-top: 30px;
+    margin-right: 50px;
+    padding: 10px 100px 10px 200px;
+}
+
+footer a:link {
+    text-decoration: none;
+    font-family: helvetica;
+    font-weight: bold;
+    color: darkred;
+}
+
+
+footer a:active {
+    color: dimgray;
+}
+
+footer a:visited {
+    color: darkred;
+}
+
+footer a:hover {
+    color:dimgray;
+}
