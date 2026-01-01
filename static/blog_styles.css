@@ -280,3 +280,9 @@ footer a:visited {
 footer a:hover {
     color:dimgray;
 }
+
+blockquote {
+    font-style: oblique;
+    font-size: 14pt;
+    padding: 10px;
+}

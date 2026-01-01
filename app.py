@@ -23,8 +23,8 @@ form = UploadForm()
 #set up to write data
 col_names = [['year', 'month', 'day', 'steps', 'distance', 'pushups', 'situps', 'squats', 'weight', 'comment']]
 date_format = '%Y-%m-%d'
-calMonth = 12
-calYear = 2025
+calMonth = 1
+calYear = 2026
 myCal = calendar.Calendar()
 
 @app.route('/')
