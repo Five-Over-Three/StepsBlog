@@ -3,6 +3,9 @@ from wtforms import Form, validators, IntegerField, FloatField, DateField, TextA
 import pandas as pd
 from datetime import datetime
 import calendar
+import plotly.graph_objects as go
+import plotly.io as io
+from jinja2 import Template
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
@@ -35,6 +38,23 @@ def blog():
     monthName = calendar.month_name[calMonth]
     link_data = dict(zip(steps_data.loc[steps_data['month'] == calMonth, 'day'], steps_data.loc[steps_data['month'] == calMonth, 'steps']))
     print(link_data)
+
+    #add chart to the template
+    targetWeight = [round(85.6 - 0.07 * x, 2) for x in range(30)]
+    actualWeight = [85.6, 85.7, 85.4]
+    date = [x+1 for x in range(30)]
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=date, y=targetWeight, mode='lines', name='Target weight', line={'color':'rgb(211,211,211)'}, zorder=1))
+    fig.add_trace(go.Scatter(x=date, y=actualWeight, mode='lines', name='Actual weight', line={'color':'rgb(139,0,0)', 'shape':'spline'}, zorder=2))
+    fig.update_layout({'xaxis':{'tick0':1, 'dtick':1, 'title':{'text':'April 2026'}, 'zerolinecolor':'rgb(139,0,0)', 'zerolinewidth':5, 'zeroline':True, 'visible':True}, 'yaxis':{'tick0':82, 'dtick':1, 'range':[82,87], 'title':{'text':'Weight (kg)'}}})
+    input_template = 'templates/pre_chart.html'
+    output_template = 'templates/chart.html'
+    chart_data = {'chart': io.to_html(fig, include_plotlyjs='cdn', full_html=False, div_id='weight_chart')}
+    with open(output_template, 'w', encoding='utf-8') as output_file:
+        with open(input_template) as input_file:
+            j2_template = Template(input_file.read())
+            output_file.write(j2_template.render(chart_data))
+
     return render_template('index.html', monthName=monthName, calMonth=calMonth, calYear=calYear, myMonth=myMonth, link_data=link_data)
 
 @app.route('/<int:year>/<int:month>/<int:day>')
