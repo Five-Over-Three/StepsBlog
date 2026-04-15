@@ -3,10 +3,11 @@ from wtforms import Form, validators, IntegerField, FloatField, DateField, TextA
 import pandas as pd
 from datetime import datetime
 import calendar
-import plotly.graph_objects as go
-import plotly.io as io
+import plotly.graph_objects as pgo
+import plotly.io as pio
 from jinja2 import Template
 from werkzeug.middleware.proxy_fix import ProxyFix
+import math
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
@@ -23,37 +24,65 @@ class UploadForm(Form):
 
 form = UploadForm()
 
-#set up to write data
+#calendar data
 col_names = [['year', 'month', 'day', 'steps', 'distance', 'pushups', 'situps', 'squats', 'weight', 'comment']]
 date_format = '%Y-%m-%d'
 calMonth = 4
 calYear = 2026
 myCal = calendar.Calendar()
+myMonth = myCal.monthdayscalendar(calYear, calMonth)
+monthName = calendar.month_name[calMonth]
+days_in_month = calendar.monthrange(calYear, calMonth)[1]
+
+#weight data
+target_weight_start = 86.0
+target_weight_tick = 0.07
+target_weight = pd.Series([round(target_weight_start - x * target_weight_tick, 2) for x in range(days_in_month)], index=[x for x in range(1, days_in_month + 1)])
+
+#prebuild chart stuffs where possible
+yaxis = {
+            'linewidth':2, 
+            'showline':True, 
+            'linecolor':'lightgrey', 
+            'gridcolor':'antiquewhite',
+            'range':[math.floor(target_weight_start - days_in_month * target_weight_tick) - 1, math.ceil(target_weight_start) + 1], 
+            'dtick':0.5, 
+            'ticklabelstep':2, 
+            'title':{'text':'Kg'}
+}
+xaxis = {
+            'linewidth':2, 
+            'showline':True, 
+            'linecolor':'lightgrey', 
+            'gridcolor':'antiquewhite',
+            'dtick':1, 
+            'title':{'text':monthName + " " + str(calYear)}
+}
+layout = {'plot_bgcolor': 'floralwhite', 'paper_bgcolor': 'floralwhite', 'xaxis': xaxis, 'yaxis': yaxis} 
+target_weight_chart = pgo.Scatter(x=target_weight.index, y=target_weight, line={'width':1, 'color':'darkgrey'}, name='Target weight')
 
 @app.route('/')
 def blog():
     #TODO - need homepage stuffs here e.g. link to latest post, calendar, graphs etc.
-    myMonth = myCal.monthdayscalendar(calYear, calMonth)
     steps_data = pd.read_csv("activitydata.csv")
-    monthName = calendar.month_name[calMonth]
     link_data = dict(zip(steps_data.loc[steps_data['month'] == calMonth, 'day'], steps_data.loc[steps_data['month'] == calMonth, 'steps']))
-    print(link_data)
 
-    #add chart to the template
-    targetWeight = [round(85.6 - 0.07 * x, 2) for x in range(30)]
-    actualWeight = [85.6, 85.7, 85.4]
-    date = [x+1 for x in range(30)]
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=date, y=targetWeight, mode='lines', name='Target weight', line={'color':'rgb(211,211,211)'}, zorder=1))
-    fig.add_trace(go.Scatter(x=date, y=actualWeight, mode='lines', name='Actual weight', line={'color':'rgb(139,0,0)', 'shape':'spline'}, zorder=2))
-    fig.update_layout({'xaxis':{'tick0':1, 'dtick':1, 'title':{'text':'April 2026'}, 'zerolinecolor':'rgb(139,0,0)', 'zerolinewidth':5, 'zeroline':True, 'visible':True}, 'yaxis':{'tick0':82, 'dtick':1, 'range':[82,87], 'title':{'text':'Weight (kg)'}}})
+    #get weight data
+    weight_index = steps_data.loc[(steps_data['year'] == 2026) & (steps_data['month'] == 4), 'day']
+    weight_data = steps_data.loc[(steps_data['year'] == 2026) & (steps_data['month'] == 4), 'weight']
+    actual_weight = pd.Series(weight_data)
+    actual_weight.index = weight_index
+
+    #build chart
+    actual_weight_chart = pgo.Scatter(x=actual_weight.index, y=actual_weight, line={'shape':'spline', 'width':3, 'color':'darkred'}, mode='lines', name='Actual weight')
+    chart = pgo.Figure([target_weight_chart, actual_weight_chart], layout=layout)
     input_template = 'templates/pre_chart.html'
     output_template = 'templates/chart.html'
-    chart_data = {'chart': io.to_html(fig, include_plotlyjs='cdn', full_html=False, div_id='weight_chart')}
+    chart_data = {'chart': pio.to_html(chart, include_plotlyjs='cdn', full_html=False, div_id='weight_chart')}
     with open(output_template, 'w', encoding='utf-8') as output_file:
         with open(input_template) as input_file:
-            j2_template = Template(input_file.read())
-            output_file.write(j2_template.render(chart_data))
+             j2_template = Template(input_file.read())
+             output_file.write(j2_template.render(chart_data))
 
     return render_template('index.html', monthName=monthName, calMonth=calMonth, calYear=calYear, myMonth=myMonth, link_data=link_data)
 
