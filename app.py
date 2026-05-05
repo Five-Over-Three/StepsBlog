@@ -27,7 +27,7 @@ form = UploadForm()
 #calendar data
 col_names = [['year', 'month', 'day', 'steps', 'distance', 'pushups', 'situps', 'squats', 'weight', 'comment']]
 date_format = '%Y-%m-%d'
-calMonth = 4
+calMonth = 5
 calYear = 2026
 myCal = calendar.Calendar()
 myMonth = myCal.monthdayscalendar(calYear, calMonth)
@@ -35,31 +35,31 @@ monthName = calendar.month_name[calMonth]
 days_in_month = calendar.monthrange(calYear, calMonth)[1]
 
 #weight data
-target_weight_start = 86.0
-target_weight_tick = 0.07
-target_weight = pd.Series([round(target_weight_start - x * target_weight_tick, 2) for x in range(days_in_month)], index=[x for x in range(1, days_in_month + 1)])
+# target_weight_start = 86.0
+# target_weight_tick = 0.07
+# target_weight = pd.Series([round(target_weight_start - x * target_weight_tick, 2) for x in range(days_in_month)], index=[x for x in range(1, days_in_month + 1)])
 
 #prebuild chart stuffs where possible
-yaxis = {
-            'linewidth':2, 
-            'showline':True, 
-            'linecolor':'lightgrey', 
-            'gridcolor':'antiquewhite',
-            'range':[math.floor(target_weight_start - days_in_month * target_weight_tick) - 1, math.ceil(target_weight_start) + 1], 
-            'dtick':0.5, 
-            'ticklabelstep':2, 
-            'title':{'text':'Kg'}
-}
-xaxis = {
-            'linewidth':2, 
-            'showline':True, 
-            'linecolor':'lightgrey', 
-            'gridcolor':'antiquewhite',
-            'dtick':1, 
-            'title':{'text':monthName + " " + str(calYear)}
-}
-layout = {'plot_bgcolor': 'floralwhite', 'paper_bgcolor': 'floralwhite', 'xaxis': xaxis, 'yaxis': yaxis} 
-target_weight_chart = pgo.Scatter(x=target_weight.index, y=target_weight, line={'width':1, 'color':'darkgrey'}, name='Target weight')
+# yaxis = {
+#             'linewidth':2, 
+#             'showline':True, 
+#             'linecolor':'lightgrey', 
+#             'gridcolor':'antiquewhite',
+#             'range':[math.floor(target_weight_start - days_in_month * target_weight_tick) - 1, math.ceil(target_weight_start) + 1], 
+#             'dtick':0.5, 
+#             'ticklabelstep':2, 
+#             'title':{'text':'Kg'}
+# }
+# xaxis = {
+#             'linewidth':2, 
+#             'showline':True, 
+#             'linecolor':'lightgrey', 
+#             'gridcolor':'antiquewhite',
+#             'dtick':1, 
+#             'title':{'text':monthName + " " + str(calYear)}
+# }
+# layout = {'plot_bgcolor': 'floralwhite', 'paper_bgcolor': 'floralwhite', 'xaxis': xaxis, 'yaxis': yaxis} 
+# target_weight_chart = pgo.Scatter(x=target_weight.index, y=target_weight, line={'width':1, 'color':'darkgrey'}, name='Target weight')
 
 @app.route('/')
 def blog():
@@ -68,21 +68,21 @@ def blog():
     link_data = dict(zip(steps_data.loc[steps_data['month'] == calMonth, 'day'], steps_data.loc[steps_data['month'] == calMonth, 'steps']))
 
     #get weight data
-    weight_index = steps_data.loc[(steps_data['year'] == 2026) & (steps_data['month'] == 4), 'day']
-    weight_data = steps_data.loc[(steps_data['year'] == 2026) & (steps_data['month'] == 4), 'weight']
-    actual_weight = pd.Series(weight_data)
-    actual_weight.index = weight_index
+    # weight_index = steps_data.loc[(steps_data['year'] == 2026) & (steps_data['month'] == 4), 'day']
+    # weight_data = steps_data.loc[(steps_data['year'] == 2026) & (steps_data['month'] == 4), 'weight']
+    # actual_weight = pd.Series(weight_data)
+    # actual_weight.index = weight_index
 
     #build chart
-    actual_weight_chart = pgo.Scatter(x=actual_weight.index, y=actual_weight, line={'shape':'spline', 'width':3, 'color':'darkred'}, mode='lines', name='Actual weight')
-    chart = pgo.Figure([target_weight_chart, actual_weight_chart], layout=layout)
-    input_template = 'templates/pre_chart.html'
-    output_template = 'templates/chart.html'
-    chart_data = {'chart': pio.to_html(chart, include_plotlyjs='cdn', full_html=False, div_id='weight_chart')}
-    with open(output_template, 'w', encoding='utf-8') as output_file:
-        with open(input_template) as input_file:
-             j2_template = Template(input_file.read())
-             output_file.write(j2_template.render(chart_data))
+    # actual_weight_chart = pgo.Scatter(x=actual_weight.index, y=actual_weight, line={'shape':'spline', 'width':3, 'color':'darkred'}, mode='lines', name='Actual weight')
+    # chart = pgo.Figure([target_weight_chart, actual_weight_chart], layout=layout)
+    # input_template = 'templates/pre_chart.html'
+    # output_template = 'templates/chart.html'
+    # chart_data = {'chart': pio.to_html(chart, include_plotlyjs='cdn', full_html=False, div_id='weight_chart')}
+    # with open(output_template, 'w', encoding='utf-8') as output_file:
+    #     with open(input_template) as input_file:
+    #          j2_template = Template(input_file.read())
+    #          output_file.write(j2_template.render(chart_data))
 
     return render_template('index.html', monthName=monthName, calMonth=calMonth, calYear=calYear, myMonth=myMonth, link_data=link_data)
 
